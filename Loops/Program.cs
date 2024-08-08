@@ -7,6 +7,8 @@
 
 
 
+
+
 namespace Loops
 {
     internal class Program
@@ -52,8 +54,17 @@ namespace Loops
             Console.WriteLine(SumAndAverage(-10, 0));
             Console.WriteLine();
 
+            //Draw triangle
+            Console.ForegroundColor = ConsoleColor.Green;
+            DrawTriangle();
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.WriteLine();
+
+            Console.WriteLine(ToThePowerOf(-2, 3));
+            Console.WriteLine(ToThePowerOf(5, 5));
             Console.WriteLine();
         }
+
 
         static void multiplicationTable()
         {
@@ -211,13 +222,57 @@ namespace Loops
             double sum = 0;
             double counter = 0;
             double i = v1;
-            while (i < v2)
+            while (i <= v2)
             {
                 sum += i;
                 counter++;
                 i++;
             }
             return $"Sum: {sum}, Average: {sum / counter}";
+        }
+
+        private static void DrawTriangle()
+        {
+            for (int i = 10; i > 0; i--)
+            {
+                for (int j = 1; j <= 10; j++)
+                {
+                    if (i < j)
+                    {
+                        Console.Write("*");
+                    }
+                    else
+                    {
+                        Console.Write(" ");
+                    }
+
+                }
+                Console.Write("*");
+                for (int j = 10; j >= 1; j--)
+                {
+                    if (i < j)
+                    {
+                        Console.Write("*");
+                    }
+                    else
+                    {
+                        Console.Write(" ");
+                    }
+
+                }
+
+                Console.WriteLine();
+            }
+        }
+
+        private static int ToThePowerOf(int v1, int v2)
+        {
+            int output = v1;
+            for (int i = 1; i < v2; i++)
+            {
+                output *= v1;
+            }
+            return output;
         }
     }
 }
