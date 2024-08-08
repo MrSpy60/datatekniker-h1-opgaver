@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Loops", "Loops\Loops.csproj
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Strings", "Strings\Strings.csproj", "{D5B512DA-335D-4B2D-A92D-EACCF35E7CDE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lommeregner", "Lommeregner\Lommeregner.csproj", "{7C09BA8C-B90B-44C1-93B1-203DCD44E59D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{D5B512DA-335D-4B2D-A92D-EACCF35E7CDE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D5B512DA-335D-4B2D-A92D-EACCF35E7CDE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D5B512DA-335D-4B2D-A92D-EACCF35E7CDE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7C09BA8C-B90B-44C1-93B1-203DCD44E59D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7C09BA8C-B90B-44C1-93B1-203DCD44E59D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7C09BA8C-B90B-44C1-93B1-203DCD44E59D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7C09BA8C-B90B-44C1-93B1-203DCD44E59D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

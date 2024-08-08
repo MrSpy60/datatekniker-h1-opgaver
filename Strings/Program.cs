@@ -51,7 +51,6 @@ namespace Strings
             Console.WriteLine(CompressString("p555ppp7www"));
         }
 
-
         private static string AddSeparator(string v1, string v2)
         {
             string output = "";

@@ -16,7 +16,7 @@ namespace Loops
         static void Main(string[] args)
         {
             //Multiplication table
-            multiplicationTable();
+            MultiplicationTable();
             Console.WriteLine();
 
             //The biggest number
@@ -66,7 +66,7 @@ namespace Loops
         }
 
 
-        static void multiplicationTable()
+        static void MultiplicationTable()
         {
             for (int i = 1; i < 11; i++)
             {
@@ -187,7 +187,7 @@ namespace Loops
         test:
             if (secondPoint != 0)
             {
-                output = v.Substring(firstPoint, secondPoint-firstPoint);
+                output = v.Substring(firstPoint, secondPoint - firstPoint);
             }
             return output;
         }
