@@ -7,37 +7,45 @@
             //Absolute value
             Console.WriteLine(AbsoluteValue(6832));
             Console.WriteLine(AbsoluteValue(-392));
+            Console.WriteLine();
 
             //multResult % 2 == 0
             Console.WriteLine(DivisibleBy2Or3(15, 30));
             Console.WriteLine(DivisibleBy2Or3(2, 90));
             Console.WriteLine(DivisibleBy2Or3(7, 12));
+            Console.WriteLine();
 
             //If consists of uppercase letters
             Console.WriteLine(IfConsistsOfUppercaseLetters("xyz"));
             Console.WriteLine(IfConsistsOfUppercaseLetters("DOG"));
             Console.WriteLine(IfConsistsOfUppercaseLetters("L9#"));
+            Console.WriteLine();
 
             //If greater than third one
             Console.WriteLine(IfGreaterThanThirdOne([2, 7, 12]));
             Console.WriteLine(IfGreaterThanThirdOne([-5, -8, 50]));
+            Console.WriteLine();
 
             //If number is even
             Console.WriteLine(IfNumberIsEven(721));
             Console.WriteLine(IfNumberIsEven(1248));
+            Console.WriteLine();
 
             //If sorted ascending
             Console.WriteLine(IfSortedAscending([3, 7, 10]));
             Console.WriteLine(IfSortedAscending([74, 62, 99]));
+            Console.WriteLine();
 
             //Positive, negative or zero
             Console.WriteLine(PositiveNegativeOrZero(5.24));
             Console.WriteLine(PositiveNegativeOrZero(0.0));
             Console.WriteLine(PositiveNegativeOrZero(-994.53));
+            Console.WriteLine();
 
             //If year is leap
             Console.WriteLine(IfYearIsLeap(2016));
             Console.WriteLine(IfYearIsLeap(2018));
+            Console.WriteLine();
         }
 
 
@@ -61,7 +69,16 @@
         
         private static bool IfConsistsOfUppercaseLetters(string v)
         {
-            return v.All(char.IsUpper);
+            foreach (char c in v)
+            {
+                if (!char.IsUpper(c))
+                {
+                    return false;
+                }
+            }
+            return true;
+            //gamme
+            //return v.All(char.IsUpper);
         }
 
         private static bool IfGreaterThanThirdOne(int[] v)
