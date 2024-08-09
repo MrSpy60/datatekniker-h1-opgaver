@@ -4,6 +4,7 @@
     {
         static void Main(string[] args)
         {
+            double lastResult = 0;
             Console.WriteLine("WELCOME TO THE BESTEST CALCULATOR ON THIS PC (cos windows didnt come with one for some reason)");
             Console.WriteLine("Type 'exit' to quit the program");
             while (true)
@@ -53,35 +54,63 @@
                         }
                     }
                 }
-                firstValue = int.Parse(tempData[0]);
+                Console.WriteLine(tempData[0].Length);
+                if (tempData[0].Length != 0)
+                {
+                    firstValue = int.Parse(tempData[0]);
+                }
+                else
+                {
+                    firstValue = lastResult;
+                }
                 secondValue = int.Parse(tempData[1]);
                 switch (operatorType)
                 {
                     case '+':
-                        Console.WriteLine(Add(firstValue,secondValue));
+                        lastResult = Add(firstValue,secondValue);
+                        Console.WriteLine(lastResult);
                         break;
                     case '-':
-                            Console.WriteLine(Subtract(firstValue, secondValue));
+                        lastResult = Subtract(firstValue, secondValue);
+                        Console.WriteLine(lastResult);
                         break;
                     case '/':
                         if (secondValue == 0){
                             Console.WriteLine("HOOMAN ERROR: Divide By 0 Not Allowed!");
                             break;
                         }
-                        Console.WriteLine(divide(firstValue, secondValue));
+                        lastResult = divide(firstValue, secondValue);
+                        Console.WriteLine(lastResult);
                         break;
                     case '*':
-                        Console.WriteLine(Multiply(firstValue, secondValue));
+                        lastResult = Multiply(firstValue, secondValue);
+                        Console.WriteLine(lastResult);
                         break;
                     case '%':
-                        Console.WriteLine(Modulus(firstValue, secondValue));
+                        lastResult = Modulus(firstValue, secondValue);
+                        Console.WriteLine(lastResult);
                         break;
+                    case '^':
+                        lastResult = toThePowerOf(firstValue, secondValue);
+                        Console.WriteLine(lastResult);
+                        break;
+
                     default:
                         Console.WriteLine("Operator not supported or implemented yet!!!");
                         break;
                 }
 
             }
+        }
+
+        private static double toThePowerOf(double firstValue, double secondValue)
+        {
+            double output = firstValue;
+            for (int i = 1; i < secondValue; i++)
+            {
+                output *= firstValue;
+            }
+            return output;
         }
 
         private static double Modulus(double firstValue, double secondValue)
