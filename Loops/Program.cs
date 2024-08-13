@@ -1,6 +1,6 @@
 ﻿namespace Loops
 {
-    internal class Program
+    public class Program
     {
         static void Main(string[] args)
         {
@@ -82,7 +82,7 @@
             }
         }
 
-        private static int TheBiggestNumber(int[] values)
+        static int TheBiggestNumber(int[] values)
         {
             int biggestNum = int.MinValue;
             foreach (int x in values)
@@ -95,7 +95,7 @@
             return biggestNum;
         }
 
-        private static int Two7sNextToEachOther(int[] values)
+        static int Two7sNextToEachOther(int[] values)
         {
             int valuesLength = values.Length;
             int counter = 0;
@@ -109,7 +109,7 @@
             return counter;
         }
 
-        private static bool ThreeIncreasingAdjacent(int[] value)
+        static bool ThreeIncreasingAdjacent(int[] value)
         {
             int valueLength = value.Length;
             for (int i = 0; i < valueLength-1; i++)
@@ -120,7 +120,7 @@
             return false;
         }
 
-        private static string SieveOfEratosthenes(int v)
+        static string SieveOfEratosthenes(int v)
         {
             List<int> primes = new List<int>();
             bool[] sieve = new bool[v-1];
@@ -151,7 +151,7 @@
             return $"[{string.Join(", ", primes)}]";
         }
 
-        private static string ExtractString(string v)
+        static string ExtractString(string v)
         {
             string output = "";
             int firstPoint = 0;
@@ -181,7 +181,7 @@
             return output;
         }
 
-        private static string FullSequenceOfLetters(string v)
+        static string FullSequenceOfLetters(string v)
         {
             string output = "";
             string alphabet = "abcdefghijklmnopqrstuvwxyz";
@@ -206,7 +206,7 @@
             return output;
         }
 
-        private static string SumAndAverage(double v1, double v2)
+        static string SumAndAverage(double v1, double v2)
         {
             double sum = 0;
             double counter = 0;
@@ -220,7 +220,7 @@
             return $"Sum: {sum}, Average: {sum / counter}";
         }
 
-        private static void DrawTriangle()
+        static void DrawTriangle()
         {
             for (int i = 10; i > 0; i--)
             {
@@ -254,7 +254,7 @@
             }
         }
 
-        private static int ToThePowerOf(int v1, int v2)
+        static int ToThePowerOf(int v1, int v2)
         {
             int output = v1;
             for (int i = 1; i < v2; i++)

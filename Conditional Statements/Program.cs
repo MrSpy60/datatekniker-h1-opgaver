@@ -1,6 +1,6 @@
 ﻿namespace Conditional_Statements
 {
-    internal class Program
+    public class Program
     {
         static void Main(string[] args)
         {
@@ -49,7 +49,7 @@
         }
 
 
-        private static int AbsoluteValue(int v)
+        public static int AbsoluteValue(int v)
         {
             if (v < 0)
             {
@@ -58,16 +58,16 @@
             return v;
         }
 
-        private static int DivisibleBy2Or3(int v1, int v2)
+        public static int DivisibleBy2Or3(int v1, int v2)
         {  
-            if ((v1 % 2 == 0 || v1 % 3 == 0) && (v2 % 2 == 0 || v2 % 3 == 0))
+            if ((v1 % 2 == 0 && v2 % 2 == 0 ) || (v1 % 3 == 0 && v2 % 3 == 0))
             {
                 return v1 * v2;
             }
             return v1 + v2;
         }
-        
-        private static bool IfConsistsOfUppercaseLetters(string v)
+
+        public static bool IfConsistsOfUppercaseLetters(string v)
         {
             foreach (char c in v)
             {
@@ -81,7 +81,7 @@
             //return v.All(char.IsUpper);
         }
 
-        private static bool IfGreaterThanThirdOne(int[] v)
+        public static bool IfGreaterThanThirdOne(int[] v)
         {
             if (v[0] * v[1] > v[2])
             {
@@ -93,7 +93,7 @@
             }
         }
 
-        private static bool IfNumberIsEven(int v)
+        public static bool IfNumberIsEven(int v)
         {
             int remainerOfV = v % 2;
             switch (remainerOfV)
@@ -106,7 +106,7 @@
             throw new NotImplementedException();
         }
 
-        private static bool IfSortedAscending(int[] v)
+        public static bool IfSortedAscending(int[] v)
         {
             int vLength = v.Length;
             for (int i = 1; i < vLength; i++)
@@ -119,7 +119,7 @@
             return true;
         }
 
-        private static string PositiveNegativeOrZero(double v)
+        public static string PositiveNegativeOrZero(double v)
         {
             if (v == 0.0)
             {
@@ -136,7 +136,7 @@
         }
 
 
-        private static bool IfYearIsLeap(int v)
+        public static bool IfYearIsLeap(int v)
         {
             if (v % 4 == 0)
             {

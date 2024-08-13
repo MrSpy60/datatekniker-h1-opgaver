@@ -2,7 +2,7 @@
 
 namespace Strings
 {
-    internal class Program
+    public class Program
     {
         static void Main(string[] args)
         {
@@ -51,7 +51,7 @@ namespace Strings
             Console.WriteLine(CompressString("p555ppp7www"));
         }
 
-        private static string AddSeparator(string v1, string v2)
+        static string AddSeparator(string v1, string v2)
         {
             string output = "";
             int v1Length = v1.Length - 1 ;
@@ -63,7 +63,7 @@ namespace Strings
             return output;
         }
 
-        private static bool IsPalindrome(string v)
+        static bool IsPalindrome(string v)
         {
             int vLength = v.Length;
             for (int i = 0; i < (vLength/2); i++)
@@ -76,7 +76,7 @@ namespace Strings
             return true;
         }
 
-        private static int LengthOfAString(string v)
+        static int LengthOfAString(string v)
         {
             int counter = 0;
             foreach (char c in v)
@@ -86,7 +86,7 @@ namespace Strings
             return counter;
         }
 
-        private static string StringInReverseOrder(string v)
+        static string StringInReverseOrder(string v)
         {
             string output = "";
             foreach (char c in v)
@@ -96,7 +96,7 @@ namespace Strings
             return output;
         }
 
-        private static int NumberOfWords(string v)
+        static int NumberOfWords(string v)
         {
             int output = 0;
             string[] strings = v.Split(" ");
@@ -110,7 +110,7 @@ namespace Strings
             return output;
         }
 
-        private static string RevertWordsOrder(string v)
+        static string RevertWordsOrder(string v)
         {
             string output = "";
             string[] strings = v.Split(" ");
@@ -147,7 +147,7 @@ namespace Strings
             return output;
         }
 
-        private static int HowManyOccurrences(string v1, string v2)
+        static int HowManyOccurrences(string v1, string v2)
         {
             int output = 0;
             int v1Length = v1.Length;
@@ -172,7 +172,7 @@ namespace Strings
             return output;
         }
         
-        private static string SortCharactersDescending(string v)
+        static string SortCharactersDescending(string v)
         {
             string output = "";
 
@@ -183,7 +183,7 @@ namespace Strings
             return output;
         }
 
-        private static string CompressString(string v)
+        static string CompressString(string v)
         {
             string output = "";
             char compare = '\0';
