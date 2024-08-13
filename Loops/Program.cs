@@ -1,15 +1,4 @@
-﻿
-
-
-
-
-
-
-
-
-
-
-namespace Loops
+﻿namespace Loops
 {
     internal class Program
     {

@@ -7,6 +7,11 @@
             double lastResult = 0;
             Console.WriteLine("WELCOME TO THE BESTEST CALCULATOR ON THIS PC (cos windows didnt come with one for some reason)");
             Console.WriteLine("Type 'exit' to quit the program");
+
+            Console.WriteLine();
+            Console.WriteLine("Current operators are ' +  -  *  /  ^  % '");
+            Console.WriteLine("If input starts with an operator, the last result will be used instead of first number");
+            Console.WriteLine();
             while (true)
             {
                 char operatorType = '\0';
@@ -20,7 +25,7 @@
                 if (input == "" || input == null) // empty or NULL detecter
                 {
                     Console.WriteLine("HOOMAN ERROR: Input empty or NULL");
-                    continue;
+                    goto endOfWhile;
                 }
 
                 if (input.ToLower() == "exit")
@@ -41,7 +46,7 @@
                 if (operatorType == '\0')
                 {
                     Console.WriteLine("HOOMAN ERROR: No Operator found (i think)");
-                    continue;
+                    goto endOfWhile;
                 }
                 tempData = input.Split(operatorType);
                 foreach (string s in tempData)
@@ -50,11 +55,11 @@
                     {
                         if (!char.IsDigit(c))
                         {
-                            continue;
+                            Console.WriteLine("HOOMAN ERROR: None integers found in input");
+                            goto endOfWhile;
                         }
                     }
                 }
-                Console.WriteLine(tempData[0].Length);
                 if (tempData[0].Length != 0)
                 {
                     firstValue = int.Parse(tempData[0]);
@@ -67,7 +72,7 @@
                 switch (operatorType)
                 {
                     case '+':
-                        lastResult = Add(firstValue,secondValue);
+                        lastResult = Add(firstValue, secondValue);
                         Console.WriteLine(lastResult);
                         break;
                     case '-':
@@ -75,7 +80,8 @@
                         Console.WriteLine(lastResult);
                         break;
                     case '/':
-                        if (secondValue == 0){
+                        if (secondValue == 0)
+                        {
                             Console.WriteLine("HOOMAN ERROR: Divide By 0 Not Allowed!");
                             break;
                         }
@@ -99,7 +105,7 @@
                         Console.WriteLine("Operator not supported or implemented yet!!!");
                         break;
                 }
-
+            endOfWhile: {}
             }
         }
 

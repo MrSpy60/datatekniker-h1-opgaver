@@ -7,10 +7,6 @@ namespace Basic
     {
         static void Main(string[] args)
         {
-
-
-
-
             //Add two numbers
             Console.WriteLine(AddAndMultiply(2, 4, 5));
             Console.WriteLine();
