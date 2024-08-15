@@ -21,6 +21,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DiceGame", "DiceGame\DiceGa
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DiceLib", "DiceLib\DiceLib.csproj", "{2B322316-FECC-4C01-81FE-AD92DC7F962B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MusicalDiceGame", "MusicalDiceGame\MusicalDiceGame.csproj", "{B9EFEFA3-E3F4-4C16-BFBA-7381A66673FF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -59,6 +61,10 @@ Global
 		{2B322316-FECC-4C01-81FE-AD92DC7F962B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2B322316-FECC-4C01-81FE-AD92DC7F962B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2B322316-FECC-4C01-81FE-AD92DC7F962B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B9EFEFA3-E3F4-4C16-BFBA-7381A66673FF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B9EFEFA3-E3F4-4C16-BFBA-7381A66673FF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B9EFEFA3-E3F4-4C16-BFBA-7381A66673FF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B9EFEFA3-E3F4-4C16-BFBA-7381A66673FF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
