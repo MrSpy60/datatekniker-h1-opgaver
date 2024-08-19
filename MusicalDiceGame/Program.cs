@@ -49,7 +49,7 @@ namespace MusicalDiceGame
             {
                 if (isRandomInstrument)
                 {
-                    instrumentPicked = instrumentChoosen(instrumentDie.RollDie());
+                    instrumentPicked = InstrumentChoosen(instrumentDie.RollDie());
                 }
 
                 int total = 0;
@@ -62,7 +62,7 @@ namespace MusicalDiceGame
             {
                 if (isRandomInstrument)
                 {
-                    instrumentPicked = instrumentChoosen(instrumentDie.RollDie());
+                    instrumentPicked = InstrumentChoosen(instrumentDie.RollDie());
                 }
                 int total = 0;
                 total += dice.RollDie();
@@ -77,12 +77,12 @@ namespace MusicalDiceGame
                 Console.SetCursorPosition(0, Console.CursorTop);
                 Console.Write($"Now Playing {soundLocation.Substring(71)}");
                 
-                playMelody(soundLocation, player);
+                PlayMelody(soundLocation, player);
             }
 
             
         }
-        private static string instrumentChoosen(int a)
+        private static string InstrumentChoosen(int a)
         {
             switch (a)
             {
@@ -100,7 +100,7 @@ namespace MusicalDiceGame
         }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Interoperability", "CA1416:Validate platform compatibility", Justification = "<Pending>")]
-        private static void playMelody(string soundLocation, SoundPlayer player)
+        private static void PlayMelody(string soundLocation, SoundPlayer player)
         {
             player.SoundLocation = soundLocation;
             player.Load();
