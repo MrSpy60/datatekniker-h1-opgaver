@@ -1,5 +1,4 @@
 ﻿using DiceLib;
-using System.Xml;
 
 namespace YatzyGame
 {
@@ -7,61 +6,68 @@ namespace YatzyGame
     internal class Program
     {
         //Global variables
-        public static List<Dice> Dices = new List<Dice>()
-            {
+        public static List<Dice> Dices =
+            [
                 new Dice(),
                 new Dice(),
                 new Dice(),
                 new Dice(),
                 new Dice()
-            };
+            ];
 
-        public static List<bool> isDielocked = new List<bool>()
-            {
+        public static List<bool> isDielocked =
+            [
                 false,
                 false,
                 false,
                 false,
                 false
-            };
+            ];
         public static int TurnStatus = 0;
         public static int SelectedField = 0;
-        public static int DiceCount = Dices.Count();
+        public static int DiceCount = Dices.Count;
         public static Player CurrentPlayer;
+        public static int CurrentPlayerIndex = 0;
+        public static int GamerulePlayerCount = 6;
 
         static void Main(string[] args)
         {
             //local variables
-            int GameruleLength = 15; //number of fields on a 5-diced Yatzy score table
+            int GameruleLength = 15; //number of fields on a 5-diced Yatzy score sheet
             int GameruleDiceThrows = 3;
+            int PickerPosition = 23 + (GamerulePlayerCount * 4);
             ConsoleKeyInfo userInput;
+            List<Player> Players = [];
 
-            List<Player> players = new List<Player>() { new()};
-            
+            for (int i = 0; i < GamerulePlayerCount; i++)
+            {
+                Players.Add(new Player());
+            }
+
             //Drawing Interface
             DrawTitle();
             DrawScoreboard();
-            DrawDice(35, 15);
-
+            DrawControls();
 
             //Gameplay Loop
             for (int i = 0; i < GameruleLength; i++)
             {
                 //Multiple players loop go here! (just testing 1 player right now)
-                foreach (Player currentPlayer in players)
+                foreach (Player currentPlayer in Players)
                 {
                     CurrentPlayer = currentPlayer;
-                
+                    CurrentPlayerIndex++;
+
                     // Reset turn variables
                     TurnStart();
                     // Roll Dice and picking
-                    for(int j = 1; j < GameruleDiceThrows; j++)
+                    for (int j = 1; j < GameruleDiceThrows; j++)
                     {
                         RollDice();
                         DrawDice(35, 15);
                         do
                         {
-                            bool IsValidKey = false; 
+                            bool IsValidKey = false;
                             Console.ForegroundColor = ConsoleColor.Black;
                             Console.SetCursorPosition(0, 28);
                             userInput = Console.ReadKey();
@@ -106,6 +112,7 @@ namespace YatzyGame
                     LockDice();
                     DrawDice(35, 15);
                     TurnStatus = 1;
+
                     // Pick Scoring Field
                     DrawPicker();
                     int lastPickerLine;
@@ -120,12 +127,12 @@ namespace YatzyGame
                         switch (userInput.Key)
                         {
                             case ConsoleKey.UpArrow:
-                                Console.SetCursorPosition(27, lastPickerLine);
+                                Console.SetCursorPosition(PickerPosition, lastPickerLine);
                                 Console.Write("    ");
                                 do
                                 {
                                     SelectedField--;
-                                    if(SelectedField < 0)
+                                    if (SelectedField < 0)
                                     {
                                         SelectedField += 15;
                                     }
@@ -133,17 +140,17 @@ namespace YatzyGame
                                 DrawPicker();
                                 break;
                             case ConsoleKey.DownArrow:
-                                Console.SetCursorPosition(27, lastPickerLine);
+                                Console.SetCursorPosition(PickerPosition, lastPickerLine);
                                 Console.Write("    ");
                                 do
                                 {
                                     SelectedField++;
-                                    if(SelectedField > 14)
+                                    if (SelectedField > 14)
                                     {
                                         SelectedField -= 15;
                                     }
-                                } while (currentPlayer.ScoreCard[SelectedField] != -1 );
-                                
+                                } while (currentPlayer.ScoreCard[SelectedField] != -1);
+
 
                                 DrawPicker();
                                 break;
@@ -155,19 +162,25 @@ namespace YatzyGame
                                 break;
                         }
                     } while (TurnStatus == 1);
-                    Console.SetCursorPosition(27, lastPickerLine);
+                    Console.SetCursorPosition(PickerPosition, lastPickerLine);
                     Console.Write("    ");
                     DrawScore(lastPickerLine, currentPlayer.ScoreCard[SelectedField]);
                 }
+                //End of round
+                CurrentPlayerIndex = 0;
             }
             //End of game
-            foreach (Player currentPlayer in players)
+            foreach (Player currentPlayer in Players)
             {
+                CurrentPlayerIndex++;
                 DrawScore(16, currentPlayer.SumCheck(), true);
                 DrawScore(17, currentPlayer.Bonus, true);
                 DrawScore(27, currentPlayer.GetTotalScore(), true);
             }
 
+            Console.SetCursorPosition(40, 28);
+            Console.Write($"Press 'Escape' to close the game");
+            //press escape to end game, prevents termination of game if spacebar is held
             do
             {
                 Console.ForegroundColor = ConsoleColor.Black;
@@ -187,12 +200,13 @@ namespace YatzyGame
 
         public static void DrawPicker()
         {
-            int StartX = 27;
+            int PlayerOffset = (GamerulePlayerCount - 1) * 4;
+            int StartX = 27 + PlayerOffset;
             int StartY = 10;
             int buffer = 0;
-            int SelectedLine = 0;
+            int SelectedLine;
 
-            if(SelectedField > 5)
+            if (SelectedField > 5)
             {
                 buffer = 2;
             }
@@ -206,7 +220,7 @@ namespace YatzyGame
         {
             string Output = " X ";
             int scoreLenght = score.ToString().Length;
-            int StartX = 26-scoreLenght;
+            int StartX = 22 - scoreLenght + (4 * CurrentPlayerIndex);
             int StartY = startY;
             if (score > 0 && isMiscFields == false || isMiscFields)
             {
@@ -214,7 +228,7 @@ namespace YatzyGame
             }
             else
             {
-                StartX = 23;
+                StartX = 19 + (4 * CurrentPlayerIndex);
             }
             Console.SetCursorPosition(StartX, StartY);
             Console.Write($"{Output}");
@@ -232,6 +246,7 @@ namespace YatzyGame
             {
                 isDielocked[i] = false;
             }
+            DrawCurrentPlayer();
             DrawDice(35, 15);
         }
 
@@ -248,7 +263,7 @@ namespace YatzyGame
 
         public static void DrawDice(int startX, int startY)
         {
-            int StartX = startX;
+            int StartX = startX + (GamerulePlayerCount - 1) * 4;
             int StartY = startY;
 
             DrawDie(StartX, StartY, 0);
@@ -274,7 +289,9 @@ namespace YatzyGame
                 Console.ForegroundColor = ConsoleColor.DarkGreen;
                 CurrentLine++;
             }
-            if (!isDielocked[diceIndex]) {
+
+            if (!isDielocked[diceIndex])
+            {
                 Console.SetCursorPosition(StartX, CurrentLine);
                 Console.Write("     ");
             }
@@ -294,7 +311,8 @@ namespace YatzyGame
             Console.SetCursorPosition(StartX, CurrentLine);
             Console.Write("└───┘");
             CurrentLine++;
-            if (isDielocked[diceIndex]) {
+            if (isDielocked[diceIndex])
+            {
                 Console.SetCursorPosition(StartX, CurrentLine);
                 Console.Write("     ");
             }
@@ -317,63 +335,90 @@ namespace YatzyGame
             int StartX = 2;
             int StartY = 9;
             int CurrentLine = StartY;
+            string ExtraPlayerSheets = "";
+            string[] UIScoreSheet = [
+                "|   Maximum points  |   |",
+                "|1'ere             5|   |",
+                "|2'ere            10|   |",
+                "|3'ere            15|   |",
+                "|4'ere            20|   |",
+                "|5'ere            25|   |",
+                "|6'ere            30|   |",
+                "|Sum                |   |",
+                "|Bonus            50|   |",
+                "|1 par            12|   |",
+                "|2 par            22|   |",
+                "|3 ens            18|   |",
+                "|4 ens            24|   |",
+                "|Lille straight   15|   |",
+                "|Stor straight    20|   |",
+                "|Hus              28|   |",
+                "|Chance           30|   |",
+                "|YATZY            50|   |",
+                "|Total              |   |"
+                ];
+            for (int i = 1; i < GamerulePlayerCount; i++)
+            {
+                ExtraPlayerSheets += "   |";
+            }
 
-            Console.SetCursorPosition(StartX, CurrentLine);
-            Console.Write("|   Maximum points  |   |");
-            CurrentLine++;
-            Console.SetCursorPosition(StartX, CurrentLine);
-            Console.Write("|1'ere             5|   |");
-            CurrentLine++;
-            Console.SetCursorPosition(StartX, CurrentLine);
-            Console.Write("|2'ere            10|   |");
-            CurrentLine++;
-            Console.SetCursorPosition(StartX, CurrentLine);
-            Console.Write("|3'ere            15|   |");
-            CurrentLine++;
-            Console.SetCursorPosition(StartX, CurrentLine);
-            Console.Write("|4'ere            20|   |");
-            CurrentLine++;
-            Console.SetCursorPosition(StartX, CurrentLine);
-            Console.Write("|5'ere            25|   |");
-            CurrentLine++;
-            Console.SetCursorPosition(StartX, CurrentLine);
-            Console.Write("|6'ere            30|   |");
-            CurrentLine++;
-            Console.SetCursorPosition(StartX, CurrentLine);
-            Console.Write("|Sum                |   |");
-            CurrentLine++;
-            Console.SetCursorPosition(StartX, CurrentLine);
-            Console.Write("|Bonus            50|   |");
-            CurrentLine++;
-            Console.SetCursorPosition(StartX, CurrentLine);
-            Console.Write("|1 par            12|   |");
-            CurrentLine++;
-            Console.SetCursorPosition(StartX, CurrentLine);
-            Console.Write("|2 par            22|   |");
-            CurrentLine++;
-            Console.SetCursorPosition(StartX, CurrentLine);
-            Console.Write("|3 ens            18|   |");
-            CurrentLine++;
-            Console.SetCursorPosition(StartX, CurrentLine);
-            Console.Write("|4 ens            24|   |");
-            CurrentLine++;
-            Console.SetCursorPosition(StartX, CurrentLine);
-            Console.Write("|Lille straight   15|   |");
-            CurrentLine++;
-            Console.SetCursorPosition(StartX, CurrentLine);
-            Console.Write("|Stor straight    15|   |");
-            CurrentLine++;
-            Console.SetCursorPosition(StartX, CurrentLine);
-            Console.Write("|Hus              28|   |");
-            CurrentLine++;
-            Console.SetCursorPosition(StartX, CurrentLine);
-            Console.Write("|Chance           30|   |");
-            CurrentLine++;
-            Console.SetCursorPosition(StartX, CurrentLine);
-            Console.Write("|YATZY            50|   |");
-            CurrentLine++;
-            Console.SetCursorPosition(StartX, CurrentLine);
-            Console.Write("|Total              |   |");
+            foreach (string SheetLine in UIScoreSheet)
+            {
+                Console.SetCursorPosition(StartX, CurrentLine);
+                Console.Write(SheetLine);
+                Console.Write(ExtraPlayerSheets);
+                CurrentLine++;
+            }
+        }
+
+        public static void DrawControls()
+        {
+            //Draw dice numbers 
+            int DiceStartX = 33 + GamerulePlayerCount * 4;
+            int DiceStartY = 23;
+            Console.SetCursorPosition(DiceStartX, DiceStartY);
+            Console.Write("1      2      3      4      5");
+
+            //Draw controls
+            int ControlStartX = 55;
+            int ControlStartY = 2;
+            int CurrentLine = ControlStartY;
+            string[] Controls = [
+                "Controls:",
+                "To lock or unlock a dice press the number shown below it,",
+                "Red dice are locked, Green dice will get rerolled.",
+                "press Spacebar to Reroll dice.",
+                "",
+                "After 3 rolls or if all 5 dice are locked,",
+                "use the arrowkeys up and down, to pick what field",
+                "to fill out or crossout"
+                ];
+
+            foreach (string Line in Controls)
+            {
+                Console.SetCursorPosition(ControlStartX, CurrentLine);
+                Console.Write(Line);
+                CurrentLine++;
+            }
+        }
+
+        public static void DrawCurrentPlayer()
+        {
+            //Current play text
+            int CurrentStartX = 33 + GamerulePlayerCount * 4;
+            int CurrentStartY = 12;
+            Console.SetCursorPosition(CurrentStartX, CurrentStartY);
+            Console.Write($"Player {CurrentPlayerIndex}'s turn");
+
+            //
+            int DiceStartX = 20 + CurrentPlayerIndex * 4;
+            int DiceStartY = 8;
+            int LastPositionoffset;
+            Console.SetCursorPosition(DiceStartX, DiceStartY);
+            Console.Write("V");
+            if (CurrentPlayerIndex == 1 ) { LastPositionoffset = 20; } else {LastPositionoffset = -4; }
+            Console.SetCursorPosition(DiceStartX + LastPositionoffset, DiceStartY);
+            Console.Write(" ");
 
         }
 
@@ -389,19 +434,27 @@ namespace YatzyGame
                 switch (SelectedField)
                 {
                     //single face
-                    case 0: case 1: case 2: case 3: case 4: case 5:
+                    case 0:
+                    case 1:
+                    case 2:
+                    case 3:
+                    case 4:
+                    case 5:
                         player.ScoreCard[SelectedField] = ScoreSingles(SelectedField + 1);
                         break;
                     //pars
-                    case 6: case 7:
+                    case 6:
+                    case 7:
                         player.ScoreCard[SelectedField] = ScorePairs(DieFaces, SelectedField - 5);
                         break;
                     // 3 and 4 of a kind
-                    case 8: case 9:
+                    case 8:
+                    case 9:
                         player.ScoreCard[SelectedField] = ScoreOfAKind(DieFaces, SelectedField - 5);
                         break;
                     //low and high straight
-                    case 10: case 11:
+                    case 10:
+                    case 11:
                         player.ScoreCard[SelectedField] = ScoreStraight(DieFaces, SelectedField - 10);
                         break;
                     //house
@@ -431,7 +484,7 @@ namespace YatzyGame
             int DieFace = dieFaceToCheckFor;
             foreach (var die in Dices)
             {
-                if(DieFace == die.LastRoll)
+                if (DieFace == die.LastRoll)
                 {
                     Output += DieFace;
                 }
@@ -446,7 +499,7 @@ namespace YatzyGame
             {
                 if (dieFaces[i] >= 2)
                 {
-                    if(numberOfPairs > 1)
+                    if (numberOfPairs > 1)
                     {
                         for (int j = i - 1; j > 0; j--)
                         {
@@ -455,7 +508,7 @@ namespace YatzyGame
                                 Output = j * 2 + i * 2;
                                 return Output;
                             }
-                            
+
                         }
                     }
                     else

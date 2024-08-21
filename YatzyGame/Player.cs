@@ -9,8 +9,8 @@ namespace YatzyGame
         {
             get { return _BonusCheckSum; }
         }
-        private int _Bonus = 0;
 
+        private int _Bonus = 0;
         public int Bonus
         {
             get { return _Bonus; }
@@ -18,7 +18,7 @@ namespace YatzyGame
         private bool _DoPlayerHaveBonus = false;
         private int _UpperSumTotal = -1;
 
-        public int[] ScoreCard = { -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1};
+        public int[] ScoreCard = [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1];
 
         public Player()
         {
