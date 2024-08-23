@@ -23,7 +23,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DiceLib", "DiceLib\DiceLib.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MusicalDiceGame", "MusicalDiceGame\MusicalDiceGame.csproj", "{B9EFEFA3-E3F4-4C16-BFBA-7381A66673FF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YatzyGame", "YatzyGame\YatzyGame.csproj", "{7C363B78-BA0B-4E96-B542-E129FBE05902}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "YatzyGame", "YatzyGame\YatzyGame.csproj", "{7C363B78-BA0B-4E96-B542-E129FBE05902}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RatRace", "RatRace\RatRace.csproj", "{23622B10-5F66-4FBE-91CF-3164C94F1A73}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -71,6 +73,10 @@ Global
 		{7C363B78-BA0B-4E96-B542-E129FBE05902}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7C363B78-BA0B-4E96-B542-E129FBE05902}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7C363B78-BA0B-4E96-B542-E129FBE05902}.Release|Any CPU.Build.0 = Release|Any CPU
+		{23622B10-5F66-4FBE-91CF-3164C94F1A73}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{23622B10-5F66-4FBE-91CF-3164C94F1A73}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{23622B10-5F66-4FBE-91CF-3164C94F1A73}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{23622B10-5F66-4FBE-91CF-3164C94F1A73}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
